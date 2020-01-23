@@ -40,10 +40,13 @@
                     "1, '1999-01-01', 201, '07:58:00'   , NULL ",
                     "2, '1999-01-01', 208, '09:01:00'   , '19:01:00' ",
                     "3, '1999-01-01', 200, '11:03:00'   , '16:01:00' ",
-                    "4, '1999-01-01', 211, '13:18:00'   , NULL ",
+					"4, '1999-01-01', 211, '13:18:00'   , NULL ",
+					
 					"5, '1999-01-02', 211, '09:43:00'  	, NULL ",
 					"6, '1999-01-02', 218, '10:22:00'  	, NULL ",
+
 					"7, '1999-01-03', 220, '09:57:00'  	, NULL ",
+					
 					"8, '1999-01-04', 201, '12:03:00'  	, NULL ",
 					"9, '1999-01-04', 200, '12:45:00'  	, NULL ",
 					"10, '1999-01-04', 216,'11:57:00'   , NULL ");
@@ -338,7 +341,7 @@
 			if ($l->magSchrijven() == false)	
 				throw new Exception("401;Geen schrijfrechten;");
 
-			if ($AanwezigLedenData == null)
+			if ($AanwezigVliegtuigData == null)
 				throw new Exception("406;AanwezigLeden data moet ingevuld zijn;");	
 
 			$where = "";
@@ -360,16 +363,10 @@
 			}
 
 			if (!array_key_exists('VLIEGTUIG_ID', $AanwezigVliegtuigData))
-				throw new Exception("406;VLIEGTUIG_ID is verplicht;");
-
-			if (isINT($AanwezigVliegtuigData['VLIEGTUIG_ID']) === false)
-				throw new Exception("405;VLIEGTUIG_ID moet een integer zijn;");				
+				throw new Exception("406;VLIEGTUIG_ID is verplicht;");		
 
 			if (!array_key_exists('DATUM', $AanwezigVliegtuigData))
-				throw new Exception("406;DATUM is verplicht;");
-
-			if (isDATE($AanwezigVliegtuigData['DATUM']) === false)
-				throw new Exception("405;DATUM moet een date (yyyy-mm-dd) zijn;");				
+				throw new Exception("406;DATUM is verplicht;");			
 
 			// Voorkom dat datum meerdere keren voorkomt in de tabel
 			try 	// Als record niet bestaat, krijgen we een exception
@@ -401,7 +398,7 @@
 			if ($l->magSchrijven() == false)	
 				throw new Exception("401;Geen schrijfrechten;");
 
-			if ($AanwezigLedenData == null)
+			if ($AanwezigVliegtuigData == null)
 				throw new Exception("406;AanwezigVliegtuigen data moet ingevuld zijn;");	
 
 			if (!array_key_exists('ID', $AanwezigVliegtuigData))
@@ -457,19 +454,31 @@
 			
 			if (array_key_exists('AANKOMST', $input))
 			{
-				if (false === $dt = isDATETIME($input['AANKOMST']))
+				if (false === $time = isTIME($input['AANKOMST']))
 					throw new Exception("405;AANKOMST heeft onjuist formaat;");				
 
-				$record['AANKOMST'] = $dt->format('H:i:00');	
+				$record['AANKOMST'] = $time;	
 			}
 				
 			if (array_key_exists('VERTREK', $input))
 			{
-				if (false === $dt = isDATETIME($input['VERTREK']))
+				if (false === $time = isTIME($input['VERTREK']))
 					throw new Exception("405;VERTREK heeft onjuist formaat;");				
 
-				$record['VERTREK'] = $dt->format('H:i:00');	
+				$record['VERTREK'] = $time;
 			}
+
+			if (array_key_exists('SNELHEID', $input))
+			{
+				if (false === $record['SNELHEID'] = isINT($input['SNELHEID']))
+					throw new Exception("405;SNELHEID moet een integer zijn;");
+			}    
+
+			if (array_key_exists('HOOGTE', $input))
+			{
+				if (false === $record['HOOGTE'] = isINT($input['HOOGTE']))
+					throw new Exception("405;HOOGTE moet een integer zijn;");
+			}   
 
 			return $record;
 		}
@@ -522,7 +531,7 @@
 			
 			// Neem data over uit aanvraag
 			$a['DATUM'] = $datetime->format('Y-m-d');
-			$a['AANKOMST'] = $datetime->format('c');
+			$a['AANKOMST'] = $datetime->format('H:i:00');
 			$a['VLIEGTUIG_ID'] = $AanmeldenVliegtuigData['VLIEGTUIG_ID'];
 			$db_record = $this->RequestToRecord($a);
 

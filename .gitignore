@@ -244,4 +244,12 @@ oud_sa/php/vendor/phpmailer/phpmailer/src/OAuth.php
 oud_sa/php/vendor/phpmailer/phpmailer/src/PHPMailer.php
 oud_sa/php/vendor/phpmailer/phpmailer/src/POP3.php
 oud_sa/php/vendor/phpmailer/phpmailer/src/SMTP.php
-postman///vmware-host/Shared Folders/Documents/startadmin.git/log/sql.txt
+//vmware-host/Shared Folders/Documents/startadmin.git/log/exec.txt
+//vmware-host/Shared Folders/Documents/startadmin.git/log/error.txt
+//vmware-host/Shared Folders/Documents/startadmin.git/log/debug.txt
+//vmware-host/Shared Folders/Documents/startadmin.git/log/insert.txt
+//vmware-host/Shared Folders/Documents/startadmin.git/log/sql.txt
+//vmware-host/Shared Folders/Documents/startadmin.git/log/update.txt
+docker/mariadb/dev_sa/oper_startlijst.frm
+docker/mariadb/dev_sa/oper_startlijst.ibd
+docker/mariadb/dev_sa/startlijst_view.frm

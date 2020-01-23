@@ -476,18 +476,18 @@
 			
 			if (array_key_exists('AANKOMST', $input))
 			{
-				if (false === $dt = isDATETIME($input['AANKOMST']))
+				if (false === $time = isTIME($input['AANKOMST']))
 					throw new Exception("405;AANKOMST heeft onjuist formaat;");				
 
-				$record['AANKOMST'] = $dt->format('H:i:00');	
+				$record['AANKOMST'] = $time;	
 			}
 				
 			if (array_key_exists('VERTREK', $input))
 			{
-				if (false === $dt = isDATETIME($input['VERTREK']))
+				if (false === $time = isTIME($input['VERTREK']))
 					throw new Exception("405;VERTREK heeft onjuist formaat;");				
 
-				$record['VERTREK'] = $dt->format('H:i:00');	
+				$record['VERTREK'] = $time;
 			}
 				
 			if (array_key_exists('OVERLAND_VLIEGTUIG_ID', $input))
@@ -556,7 +556,7 @@
 			
 			// Neem data over uit aanvraag
 			$a['DATUM'] = $datetime->format('Y-m-d');
-			$a['AANKOMST'] = $datetime->format('c');
+			$a['AANKOMST'] = $datetime->format('H:i:00');
 			$a['LID_ID'] = $AanmeldenLedenData['LID_ID'];
 			$db_record = $this->RequestToRecord($a);
 

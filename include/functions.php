@@ -104,6 +104,15 @@ define('phpTab', "\t");
 		return DateTime::createFromFormat("Y-m-d", $value);
 	}
 
+	// Is de waarde een time
+	function isTIME($value)
+	{			
+		if (!preg_match("/^([01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])$/",$value))
+			return false;
+		
+		return $value;
+	}
+
 	// Is de waarde een boolean
 	function isBOOL($value)
 	{

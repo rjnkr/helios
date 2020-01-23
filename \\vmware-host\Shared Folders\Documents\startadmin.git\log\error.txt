@@ -865,3 +865,359 @@ SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field l
 				FROM
 					`aanwezig_vliegtuigen_view` WHERE 1=1  ORDER BY DATUM DESC, POSITIE, ID LIMIT 0 , 2 
 SQLSTATE[42S22]: Column not found: 1054 Unknown column 'VLIEGER' in 'field list'
+2020-01-18 22:19:35:
+				CREATE TABLE `oper_startlijst` (
+					`ID` mediumint UNSIGNED NOT NULL AUTO_INCREMENT,
+					`DATUM` date NOT NULL,
+					`DAGNUMMER` tinyint UNSIGNED NOT NULL DEFAULT 0,
+					`VLIEGTUIG_ID` mediumint UNSIGNED NOT NULL,
+					`STARTTIJD` time UNSIGNED DEFAULT NULL,
+					`LANDINGSTIJD` time UNSIGNED DEFAULT NULL,
+					`STARTMETHODE_ID` mediumint UNSIGNED DEFAULT NULL,
+					`VLIEGER_ID` mediumint UNSIGNED DEFAULT NULL,
+					`INZITTENDE_ID` mediumint UNSIGNED DEFAULT NULL,
+					`VLIEGERNAAM` varchar(5) UNSIGNED DEFAULT NULL,
+					`INZITTENDENAAM` varchar(50) UNSIGNED DEFAULT NULL,
+					`SLEEPKIST_ID` mediumint UNSIGNED DEFAULT NULL,
+					`SLEEP_HOOGTE` smallint UNSIGNED DEFAULT NULL,
+                    `VELD_ID` mediumint UNSIGNED DEFAULT NULL,
+                    `OPMERKINGEN` text DEFAULT NULL,,
+					`VERWIJDERD` tinyint UNSIGNED NOT NULL DEFAULT '0',
+					`LAATSTE_AANPASSING` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+					 
+					CONSTRAINT ID_PK PRIMARY KEY (ID),
+                        INDEX (`DATUM`), 
+                        INDEX (`VLIEGTUIG_ID`), 
+                        INDEX (`VLIEGER_ID`), 
+                        INDEX (`INZITTENDE_ID`), 
+						INDEX (`VERWIJDERD`),
+
+					FOREIGN KEY (VLIEGTUIG_ID) REFERENCES ref_vliegtuigen(ID),		
+					FOREIGN KEY (STARTMETHODE_ID) REFERENCES ref_types(ID),	
+					FOREIGN KEY (VLIEGER_ID) REFERENCES ref_leden(ID),	
+					FOREIGN KEY (INZITTENDE_ID) REFERENCES ref_leden(ID),	
+					FOREIGN KEY (SLEEPKIST_ID) REFERENCES ref_vliegtuigen(ID),	
+					FOREIGN KEY (VELD_ID) REFERENCES ref_types(ID)
+				)
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'UNSIGNED DEFAULT NULL,
+					`LANDINGSTIJD` time UNSIGNED DEFAULT NULL,
+					`STA' at line 6
+2020-01-22 13:58:20:
+SQLSTATE[HY000]: General error: trying to execute an empty query
+2020-01-22 21:14:26:INSERT INTO oper_startlijst (DATUM,DAGNUMMER) VALUES ('2017-10-01',1);
+SQLSTATE[HY000]: General error: 1364 Field 'VLIEGTUIG_ID' doesn't have a default value
+2020-01-23 18:08:28:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`types_view`  WHERE 1=1  ORDER BY SORTEER_VOLGORDE, ID LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
+2020-01-23 18:08:49:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`daginfo_view` WHERE 1=1  ORDER BY DATUM DESC LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
+2020-01-23 18:09:21:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`vliegtuigen_view` WHERE 1=1  ORDER BY CLUBKIST DESC, VOLGORDE, REGISTRATIE LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
+2020-01-23 18:09:45:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`leden_view` WHERE 1=1  ORDER BY ACHTERNAAM, VOORNAAM LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
+2020-01-23 18:09:46:
+							INSERT INTO `oper_rooster` (
+								`ID`, 
+								`DATUM`, 
+								`DDWV`, 
+								`CLUB_BEDRIJF`, 
+								`OCHTEND_DDI_ID`, 
+								`OCHTEND_INSTRUCTEUR_ID`, 
+								`OCHTEND_LIERIST_ID`, 
+								`OCHTEND_HULPLIERIST_ID`, 
+								`OCHTEND_STARTLEIDER_ID`, 
+								`MIDDAG_DDI_ID`, 
+								`MIDDAG_INSTRUCTEUR_ID`, 
+								`MIDDAG_LIERIST_ID`, 
+								`MIDDAG_HULPLIERIST_ID`, 
+								`MIDDAG_STARTLEIDER_ID`) 
+							VALUES
+								(3, '1999-01-03', 1, 0, 10507, 10001, 10804, NULL, NULL,  10470, NULL,  NULL,  NULL, NULL);
+SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`dev_sa`.`oper_rooster`, CONSTRAINT `oper_rooster_ibfk_1` FOREIGN KEY (`OCHTEND_DDI_ID`) REFERENCES `ref_leden` (`ID`))
+2020-01-23 18:10:15:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`rooster_view` WHERE 1=1  ORDER BY DATUM DESC LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
+2020-01-23 18:10:43:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`aanwezig_leden_view` WHERE 1=1  ORDER BY DATUM DESC, POSITIE, ID LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
+2020-01-23 18:11:14:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`aanwezig_vliegtuigen_view` WHERE 1=1  ORDER BY DATUM DESC, POSITIE, ID LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
+2020-01-23 18:11:43:INSERT INTO oper_startlijst (DATUM,DAGNUMMER) VALUES ('2015-06-23',1);
+SQLSTATE[HY000]: General error: 1364 Field 'VLIEGTUIG_ID' doesn't have a default value
+2020-01-23 18:11:44:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`startlijst_view` WHERE 1=1  ORDER BY DATUM DESC LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
+2020-01-23 18:23:50:INSERT INTO oper_startlijst (DATUM,DAGNUMMER) VALUES ('2018-10-27',1);
+SQLSTATE[HY000]: General error: 1364 Field 'VLIEGTUIG_ID' doesn't have a default value
+2020-01-23 18:29:35:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`types_view`  WHERE 1=1  ORDER BY SORTEER_VOLGORDE, ID LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
+2020-01-23 18:30:03:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`daginfo_view` WHERE 1=1  ORDER BY DATUM DESC LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
+2020-01-23 18:30:52:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`vliegtuigen_view` WHERE 1=1  ORDER BY CLUBKIST DESC, VOLGORDE, REGISTRATIE LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
+2020-01-23 18:31:29:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`leden_view` WHERE 1=1  ORDER BY ACHTERNAAM, VOORNAAM LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
+2020-01-23 18:31:30:
+							INSERT INTO `oper_rooster` (
+								`ID`, 
+								`DATUM`, 
+								`DDWV`, 
+								`CLUB_BEDRIJF`, 
+								`OCHTEND_DDI_ID`, 
+								`OCHTEND_INSTRUCTEUR_ID`, 
+								`OCHTEND_LIERIST_ID`, 
+								`OCHTEND_HULPLIERIST_ID`, 
+								`OCHTEND_STARTLEIDER_ID`, 
+								`MIDDAG_DDI_ID`, 
+								`MIDDAG_INSTRUCTEUR_ID`, 
+								`MIDDAG_LIERIST_ID`, 
+								`MIDDAG_HULPLIERIST_ID`, 
+								`MIDDAG_STARTLEIDER_ID`) 
+							VALUES
+								(3, '1999-01-03', 1, 0, 10507, 10001, 10804, NULL, NULL,  10470, NULL,  NULL,  NULL, NULL);
+SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`dev_sa`.`oper_rooster`, CONSTRAINT `oper_rooster_ibfk_1` FOREIGN KEY (`OCHTEND_DDI_ID`) REFERENCES `ref_leden` (`ID`))
+2020-01-23 18:32:14:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`rooster_view` WHERE 1=1  ORDER BY DATUM DESC LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
+2020-01-23 18:32:56:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`aanwezig_leden_view` WHERE 1=1  ORDER BY DATUM DESC, POSITIE, ID LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
+2020-01-23 18:33:31:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`aanwezig_vliegtuigen_view` WHERE 1=1  ORDER BY DATUM DESC, POSITIE, ID LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
+2020-01-23 18:53:48:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`types_view`  WHERE 1=1  ORDER BY SORTEER_VOLGORDE, ID LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
+2020-01-23 18:54:10:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`daginfo_view` WHERE 1=1  ORDER BY DATUM DESC LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
+2020-01-23 18:54:45:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`vliegtuigen_view` WHERE 1=1  ORDER BY CLUBKIST DESC, VOLGORDE, REGISTRATIE LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
+2020-01-23 18:55:13:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`leden_view` WHERE 1=1  ORDER BY ACHTERNAAM, VOORNAAM LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
+2020-01-23 18:55:14:
+							INSERT INTO `oper_rooster` (
+								`ID`, 
+								`DATUM`, 
+								`DDWV`, 
+								`CLUB_BEDRIJF`, 
+								`OCHTEND_DDI_ID`, 
+								`OCHTEND_INSTRUCTEUR_ID`, 
+								`OCHTEND_LIERIST_ID`, 
+								`OCHTEND_HULPLIERIST_ID`, 
+								`OCHTEND_STARTLEIDER_ID`, 
+								`MIDDAG_DDI_ID`, 
+								`MIDDAG_INSTRUCTEUR_ID`, 
+								`MIDDAG_LIERIST_ID`, 
+								`MIDDAG_HULPLIERIST_ID`, 
+								`MIDDAG_STARTLEIDER_ID`) 
+							VALUES
+								(3, '1999-01-03', 1, 0, 10507, 10001, 10804, NULL, NULL,  10470, NULL,  NULL,  NULL, NULL);
+SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`dev_sa`.`oper_rooster`, CONSTRAINT `oper_rooster_ibfk_1` FOREIGN KEY (`OCHTEND_DDI_ID`) REFERENCES `ref_leden` (`ID`))
+2020-01-23 18:55:47:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`rooster_view` WHERE 1=1  ORDER BY DATUM DESC LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
+2020-01-23 18:56:17:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`aanwezig_leden_view` WHERE 1=1  ORDER BY DATUM DESC, POSITIE, ID LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
+2020-01-23 18:56:50:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`aanwezig_vliegtuigen_view` WHERE 1=1  ORDER BY DATUM DESC, POSITIE, ID LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
+2020-01-23 20:52:24:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`types_view`  WHERE 1=1  ORDER BY SORTEER_VOLGORDE, ID LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
+2020-01-23 20:52:48:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`daginfo_view` WHERE 1=1  ORDER BY DATUM DESC LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
+2020-01-23 20:53:28:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`vliegtuigen_view` WHERE 1=1  ORDER BY CLUBKIST DESC, VOLGORDE, REGISTRATIE LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
+2020-01-23 20:53:56:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`leden_view` WHERE 1=1  ORDER BY ACHTERNAAM, VOORNAAM LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
+2020-01-23 20:53:56:
+							INSERT INTO `oper_rooster` (
+								`ID`, 
+								`DATUM`, 
+								`DDWV`, 
+								`CLUB_BEDRIJF`, 
+								`OCHTEND_DDI_ID`, 
+								`OCHTEND_INSTRUCTEUR_ID`, 
+								`OCHTEND_LIERIST_ID`, 
+								`OCHTEND_HULPLIERIST_ID`, 
+								`OCHTEND_STARTLEIDER_ID`, 
+								`MIDDAG_DDI_ID`, 
+								`MIDDAG_INSTRUCTEUR_ID`, 
+								`MIDDAG_LIERIST_ID`, 
+								`MIDDAG_HULPLIERIST_ID`, 
+								`MIDDAG_STARTLEIDER_ID`) 
+							VALUES
+								(3, '1999-01-03', 1, 0, 10507, 10001, 10804, NULL, NULL,  10470, NULL,  NULL,  NULL, NULL);
+SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`dev_sa`.`oper_rooster`, CONSTRAINT `oper_rooster_ibfk_1` FOREIGN KEY (`OCHTEND_DDI_ID`) REFERENCES `ref_leden` (`ID`))
+2020-01-23 20:54:29:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`rooster_view` WHERE 1=1  ORDER BY DATUM DESC LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
+2020-01-23 20:55:01:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`aanwezig_leden_view` WHERE 1=1  ORDER BY DATUM DESC, POSITIE, ID LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
+2020-01-23 20:55:40:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`aanwezig_vliegtuigen_view` WHERE 1=1  ORDER BY DATUM DESC, POSITIE, ID LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
+2020-01-23 21:01:29:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`types_view`  WHERE 1=1  ORDER BY SORTEER_VOLGORDE, ID LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
+2020-01-23 21:01:52:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`daginfo_view` WHERE 1=1  ORDER BY DATUM DESC LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
+2020-01-23 21:02:27:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`vliegtuigen_view` WHERE 1=1  ORDER BY CLUBKIST DESC, VOLGORDE, REGISTRATIE LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
+2020-01-23 21:02:55:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`leden_view` WHERE 1=1  ORDER BY ACHTERNAAM, VOORNAAM LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
+2020-01-23 21:02:55:
+							INSERT INTO `oper_rooster` (
+								`ID`, 
+								`DATUM`, 
+								`DDWV`, 
+								`CLUB_BEDRIJF`, 
+								`OCHTEND_DDI_ID`, 
+								`OCHTEND_INSTRUCTEUR_ID`, 
+								`OCHTEND_LIERIST_ID`, 
+								`OCHTEND_HULPLIERIST_ID`, 
+								`OCHTEND_STARTLEIDER_ID`, 
+								`MIDDAG_DDI_ID`, 
+								`MIDDAG_INSTRUCTEUR_ID`, 
+								`MIDDAG_LIERIST_ID`, 
+								`MIDDAG_HULPLIERIST_ID`, 
+								`MIDDAG_STARTLEIDER_ID`) 
+							VALUES
+								(3, '1999-01-03', 1, 0, 10507, 10001, 10804, NULL, NULL,  10470, NULL,  NULL,  NULL, NULL);
+SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`dev_sa`.`oper_rooster`, CONSTRAINT `oper_rooster_ibfk_1` FOREIGN KEY (`OCHTEND_DDI_ID`) REFERENCES `ref_leden` (`ID`))
+2020-01-23 21:03:28:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`rooster_view` WHERE 1=1  ORDER BY DATUM DESC LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
+2020-01-23 21:03:58:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`aanwezig_leden_view` WHERE 1=1  ORDER BY DATUM DESC, POSITIE, ID LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
+2020-01-23 21:04:30:
+				SELECT 
+					ID, BESTAATNIET
+				FROM
+					`aanwezig_vliegtuigen_view` WHERE 1=1  ORDER BY DATUM DESC, POSITIE, ID LIMIT 0 , 2 
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'BESTAATNIET' in 'field list'
