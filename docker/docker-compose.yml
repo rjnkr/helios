@@ -1,0 +1,64 @@
+
+version: '3.1'
+
+services:
+    web:
+        image: nginx:latest
+        ports:
+            - "80:80"
+        volumes:
+            - ./..:/app
+            - ./site.conf:/etc/nginx/conf.d/site.conf
+        links:
+            - php
+            - mariadb:mariadb
+            - phpmyadmin:phpmyadmin
+    php:
+        build: ./
+        image: php:7-fpm
+        volumes:
+            - ./..:/app
+            - ./php.ini:/usr/local/etc/php/conf.d/local.ini   
+    mariadb:
+        image: mariadb
+        container_name: mariadb
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: rootroot
+        volumes:
+            - "./mariadb/:/var/lib/mysql"
+            - ./log/:/var/log/mysql/
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: phpMyAdmin
+        restart: always
+        ports:
+            - "8080:80"
+        environment:
+            - "PMA_HOST=mariadb"
+            - "PMA_PORT=3306"
+        # - "PMA_ABSOLUTE_URI=http://helios.local:8080"
+        links:
+            - mariadb:mariadb
+        volumes:
+            - "./phpmyadmin/sessions:/sessions"
+            - ./php.ini:/usr/local/etc/php/conf.d/local.ini 
+
+
+   
+
+#    wordpress:
+#        image: wordpress
+#        restart: always
+#        ports:
+#        - 81:80
+#        environment:
+#            - "WORDPRESS_DB_HOST=mariadb"
+#            - "WORDPRESS_DB_USER=gezc_wordpress"
+#            - "WORDPRESS_DB_PASSWORD=gezc_wordpress"
+#            - "WORDPRESS_DB_NAME=gezc_wordpress"
+#        links:
+#            - mariadb:mariadb
+#        volumes:
+#            - ./../wordpress:/var/www/html            
+
